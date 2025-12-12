@@ -1,0 +1,9 @@
+{
+  "title": "06 empty",
+  "input": {},
+  "mapping": {
+    "@type": "Person",
+    "name": "/name"
+  },
+  "expected": null
+}

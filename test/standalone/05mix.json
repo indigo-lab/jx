@@ -1,0 +1,29 @@
+{
+  "title": "simple",
+  "input": {
+    "name": "Alice",
+    "son": ["Bob", "Dave"],
+    "daughter": "Carol"
+  },
+  "mapping": {
+    "@type": "Person",
+    "name": "/name",
+    "knows/son": {
+      "@type": "Person",
+      "name": "."
+    },
+    "knows/daughter": {
+      "@type": "Person",
+      "name": "."
+    }
+  },
+  "expected": {
+    "@type": "Person",
+    "name": "Alice",
+    "knows": [
+      { "@type": "Person", "name": "Bob" },
+      { "@type": "Person", "name": "Dave" },
+      { "@type": "Person", "name": "Carol" }
+    ]
+  }
+}

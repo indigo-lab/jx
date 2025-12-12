@@ -1,0 +1,7 @@
+{
+  "type": "Person",
+  "name": "/name",
+  "age": "/age",
+  "children/children": { "$ref": "Person.json" },
+  "address/address": { "$ref": "Address.json" }
+}

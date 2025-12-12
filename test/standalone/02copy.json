@@ -1,0 +1,15 @@
+{
+  "title": "02 copy",
+  "input": {
+    "a": { "hello": "world" },
+    "b": [1, 2, 3, 4, 5]
+  },
+  "mapping": {
+    "object": "/a",
+    "array": "/b"
+  },
+  "expected": {
+    "object": { "hello": "world" },
+    "array": [1, 2, 3, 4, 5]
+  }
+}

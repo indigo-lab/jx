@@ -1,0 +1,15 @@
+{
+  "title": "03 nest",
+  "input": {
+    "name": "Alice",
+    "son": ["Bob", "Dave"]
+  },
+  "mapping": {
+    "name": "/name",
+    "children/son": "."
+  },
+  "expected": {
+    "name": "Alice",
+    "children": ["Bob", "Dave"]
+  }
+}

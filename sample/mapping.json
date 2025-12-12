@@ -1,0 +1,13 @@
+{
+  "@context": { "@vocab": "http://xmlns.com/foaf/0.1/" },
+  "@type": "Person",
+  "name": "/name",
+  "knows/son": {
+    "@type": "Person",
+    "name": "."
+  },
+  "knows/daughter": {
+    "@type": "Person",
+    "name": "."
+  }
+}

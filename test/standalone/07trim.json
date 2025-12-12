@@ -1,0 +1,15 @@
+{
+  "title": "07 trim",
+  "input": {
+    "name": "John"
+  },
+  "mapping": {
+    "type": "Person",
+    "name": "/name",
+    "identifier": { "type": "SSID", "id": "/ssid" }
+  },
+  "expected": {
+    "type": "Person",
+    "name": "John"
+  }
+}

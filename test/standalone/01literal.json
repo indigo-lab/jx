@@ -1,0 +1,24 @@
+{
+  "title": "01 literal",
+  "input": {
+    "a": true,
+    "b": false,
+    "c": null,
+    "d": 3.1415,
+    "e": "hello"
+  },
+  "mapping": {
+    "true": "/a",
+    "false": "/b",
+    "null": "/c",
+    "number": "/d",
+    "string": "/e"
+  },
+  "expected": {
+    "true": true,
+    "false": false,
+    "null": null,
+    "number": 3.1415,
+    "string": "hello"
+  }
+}
