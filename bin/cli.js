@@ -18,4 +18,4 @@ const base = path.dirname(path.resolve(process.argv[2]));
 const template = JSON.parse(fs.readFileSync(process.argv[2], "UTF-8"));
 const src = JSON.parse(fs.readFileSync(process.argv[3], "UTF-8"));
 
-console.log(JSON.stringify(jx(template, src, base), null, 2));
+console.log(JSON.stringify(jx(template, src, { base: base, jsonld: true }), null, 2));

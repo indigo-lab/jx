@@ -61,7 +61,7 @@ test("test jx ref", function (t) {
   const mapping = JSON.parse(fs.readFileSync(`${base}/Person.json`, "UTF-8"));
 
   for (const [key, val] of Object.entries(def)) {
-    t.deepEqual(jx(mapping, val.input, base), val.expected, key);
+    t.deepEqual(jx(mapping, val.input, { base }), val.expected, key);
   }
 
   t.end();

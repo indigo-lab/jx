@@ -1,8 +1,11 @@
 const jsonpointer = require("jsonpointer");
 const fs = require("fs");
 const path = require("path");
+const context = require("./lib/context.js");
 
-module.exports = function (template, src, base) {
+module.exports = function (template, src, options) {
+  const { base, jsonld } = options || {};
+
   const isStatic = function (a) {
     if (Array.isArray(a)) return a.find((b) => !isStatic(b)) === undefined;
     if (typeof a === "string") return a !== "." && !a.startsWith("/");
@@ -71,9 +74,11 @@ module.exports = function (template, src, base) {
       const res = dig(template, e);
       if (res.modified) answer.push(res.body);
     }
-    return answer;
+
+    return jsonld ? context(answer) : answer;
   } else {
     const res = dig(template, src);
-    return res.modified ? res.body : null;
+    if (!res.modified) return null;
+    return jsonld ? context(res.body) : res.body;
   }
 };
