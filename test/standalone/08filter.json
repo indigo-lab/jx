@@ -1,0 +1,24 @@
+{
+  "title": "08 filter",
+  "input": {
+    "children": [
+      { "name": "John", "gender": "M", "age": 13 },
+      { "name": "Alice", "gender": "F", "age": 9 },
+      { "name": "Bob" }
+    ]
+  },
+  "mapping": {
+    "son/children[gender='M']": { "name": "/name" },
+    "daughter/children[gender='F']": { "name": "/name" },
+    "known/children[gender]": { "name": "/name" },
+    "unknown/children[!gender]": { "name": "/name" },
+    "teen/children[age>12]": { "name": "/name" }
+  },
+  "expected": {
+    "son": { "name": "John" },
+    "daughter": { "name": "Alice" },
+    "known": [{ "name": "John" }, { "name": "Alice" }],
+    "unknown": { "name": "Bob" },
+    "teen": { "name": "John" }
+  }
+}

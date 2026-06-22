@@ -80,6 +80,4 @@ JSON マッピングの中に登場するスラッシュで始まる JSON String
 JSON マッピングの中に登場する JSON String が `"."` である場合は、
 現在のコンテクストによって置換されます。
 
-### Feature4: ref
-
 **To be added**

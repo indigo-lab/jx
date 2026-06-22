@@ -1,0 +1,90 @@
+{
+  "title": "09 checksum",
+  "input": {
+    "uuid": "5c604d92-6bb4-11f1-a312-00155d8dd7b3",
+    "name": "data.csv",
+    "md5": "3f4fe7d818b7df4b62fb308877e10e92",
+    "sha256": "6f809115fc59c92e2087a2a9f78781da4cd241003f806865b8b61211220cf22b",
+    "sha1": "24d9a449ed32c88c4bea2a4d6aa0c309990930e7",
+    "size": 2197,
+    "modified": "2026-06-19",
+    "public": true,
+    "license": "CC-BY-4.0"
+  },
+  "mapping": {
+    "@context": {
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "spdx": "http://spdx.org/rdf/terms#",
+      "dcterms": "http://purl.org/dc/terms/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@type": "dcat:Dataset",
+    "@id": "urn:uuid:{/uuid}",
+    "dcterms:accessRights/[public=true]": {
+      "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+    },
+    "distribution": {
+      "@type": "dcat:Distibution",
+      "dcterms:title": "/name",
+      "dcat:byteSize": "/size",
+      "dcterms:modified": {
+        "@type": "xsd:date",
+        "@value": "/modified"
+      },
+      "spdx:checksum/md5": {
+        "@type": "spdx:Checksum",
+        "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_md5" },
+        "spdx:checksumValue": "."
+      },
+      "spdx:checksum/sha1": {
+        "@type": "spdx:Checksum",
+        "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" },
+        "spdx:checksumValue": "."
+      },
+      "spdx:checksum/sha256": {
+        "@type": "spdx:Checksum",
+        "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha256" },
+        "spdx:checksumValue": "."
+      }
+    }
+  },
+  "expected": {
+    "@context": {
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "spdx": "http://spdx.org/rdf/terms#",
+      "dcterms": "http://purl.org/dc/terms/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@type": "dcat:Dataset",
+    "@id": "urn:uuid:5c604d92-6bb4-11f1-a312-00155d8dd7b3",
+    "distribution": {
+      "@type": "dcat:Distibution",
+      "dcterms:title": "data.csv",
+      "dcat:byteSize": 2197,
+      "dcterms:modified": {
+        "@type": "xsd:date",
+        "@value": "2026-06-19"
+      },
+      "spdx:checksum": [
+        {
+          "@type": "spdx:Checksum",
+          "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_md5" },
+          "spdx:checksumValue": "3f4fe7d818b7df4b62fb308877e10e92"
+        },
+        {
+          "@type": "spdx:Checksum",
+          "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" },
+          "spdx:checksumValue": "24d9a449ed32c88c4bea2a4d6aa0c309990930e7"
+        },
+        {
+          "@type": "spdx:Checksum",
+          "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha256" },
+          "spdx:checksumValue": "6f809115fc59c92e2087a2a9f78781da4cd241003f806865b8b61211220cf22b"
+        }
+      ]
+    },
+    "dcterms:accessRights": {
+      "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
+    }
+  }
+}
