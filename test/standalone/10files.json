@@ -29,7 +29,7 @@
     "@type": "dcat:Dataset",
     "@id": "https://example.org/{/name}",
     "dcat:distribution{/files}": {
-      "@type": "dcat:Distibution",
+      "@type": "dcat:Distribution",
       "@id": "https://example.org/{/name}/{name}",
       "dcterms:title": "{name}",
       "dcat:byteSize": "{size}",
@@ -65,7 +65,7 @@
     "@id": "https://example.org/data",
     "dcat:distribution": [
       {
-        "@type": "dcat:Distibution",
+        "@type": "dcat:Distribution",
         "@id": "https://example.org/data/README.md",
         "dcterms:title": "README.md",
         "dcat:byteSize": 2179,
@@ -92,7 +92,7 @@
         ]
       },
       {
-        "@type": "dcat:Distibution",
+        "@type": "dcat:Distribution",
         "@id": "https://example.org/data/main.js",
         "dcterms:title": "main.js",
         "dcat:byteSize": 3900,

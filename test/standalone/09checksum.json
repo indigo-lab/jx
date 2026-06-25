@@ -24,7 +24,7 @@
       "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
     },
     "distribution": {
-      "@type": "dcat:Distibution",
+      "@type": "dcat:Distribution",
       "dcterms:title": "{name}",
       "dcat:byteSize": "{size}",
       "dcterms:modified": {
@@ -58,7 +58,7 @@
     "@type": "dcat:Dataset",
     "@id": "urn:uuid:5c604d92-6bb4-11f1-a312-00155d8dd7b3",
     "distribution": {
-      "@type": "dcat:Distibution",
+      "@type": "dcat:Distribution",
       "dcterms:title": "data.csv",
       "dcat:byteSize": 2197,
       "dcterms:modified": {
