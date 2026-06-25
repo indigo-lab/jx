@@ -1,10 +1,10 @@
 {
   "name": "@indigo-lab/jx",
   "version": "0.0.1",
-  "description": "JX is a JSON mapping spec and a set of tools for minimalists",
+  "description": "JX is a JSON transform spec and a set of tools for minimalists",
   "keywords": [
     "JSON",
-    "mapping"
+    "transform"
   ],
   "bin": {
     "jx": "bin/cli.js"

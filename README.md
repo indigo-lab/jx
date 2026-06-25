@@ -11,7 +11,7 @@ npm install @indigo-lab/jx
 ## CLI
 
 ```bash
-jx <mapping.json> <data.json>
+jx <template.json> <data.json>
 ```
 
 ## API
@@ -19,7 +19,7 @@ jx <mapping.json> <data.json>
 ```js
 const jx = require("@indigo-lab/jx");
 
-const result = jx(mapping, source);
+const result = jx(template, source);
 // → 変換結果のオブジェクト、または null
 ```
 
