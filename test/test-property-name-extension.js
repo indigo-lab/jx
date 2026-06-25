@@ -81,7 +81,7 @@ test("test property-name-extension", function (t) {
   t.throws(() => parse("teen{children[age<null]}"));
   t.throws(() => parse("teen{children[age<=true]}"));
   t.throws(() => parse("teen{children[age<=null]}"));
-  t.throws(() => parse("teen{children[age=>true]}"));
-  t.throws(() => parse("teen{children[age=>null]}"));
+  t.throws(() => parse("teen{children[age>=true]}"));
+  t.throws(() => parse("teen{children[age>=null]}"));
   t.end();
 });
