@@ -8,7 +8,12 @@ if (process.argv.length !== 4) {
   process.exit(1);
 }
 
-const template = JSON.parse(fs.readFileSync(process.argv[2], "UTF-8"));
-const src = JSON.parse(fs.readFileSync(process.argv[3], "UTF-8"));
-
-console.log(JSON.stringify(jx(template, src), null, 2));
+try {
+  const template = JSON.parse(fs.readFileSync(process.argv[2], "UTF-8"));
+  const source = JSON.parse(fs.readFileSync(process.argv[3], "UTF-8"));
+  const json = jx(template, source);
+  console.log(JSON.stringify(json, null, 2));
+} catch (e) {
+  console.error(e.message);
+  process.exit(1);
+}

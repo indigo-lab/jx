@@ -21,14 +21,19 @@ Relative = $([^\/\.\{\}\[\]<>!=] [^\{\}\[\]<>!=]*)
 
 Filter = "[" condition:Condition "]" {return condition;}
 
-Condition = Relation / NotExist / Exist
+Condition = Order / Equality / NotExist / Exist
   
 Exist = pointer:Relative {return {pointer,op:"Exist"};}
 
 NotExist = "!" pointer:Relative {return {pointer,op:"NotExist"};}
 
-Relation= pointer:Relative op:("<=" / ">=" / "<" / ">" / "!=" / "=") value:Literal {return {pointer,op,value};}
-  
+Order = pointer:Relative op:("<=" / ">=" / "<" / ">") value:OrderableLiteral {return {pointer,op,value};}
+
+Equality = pointer:Relative op:("!=" / "=") value:Literal {return {pointer,op,value};}
+
+OrderableLiteral "orderable literal (number or string)"
+  = Number / Integer / String
+
 Literal "literal"
   = String / True / False / Number / Integer / Null
 

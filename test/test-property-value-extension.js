@@ -43,5 +43,13 @@ test("test property-value-extension", function (t) {
   t.deepEqual(parse("a{b}\\}c{d}e"), ["a", { pointer: "b" }, "}c", { pointer: "d" }, "e"]);
   t.deepEqual(parse("a{b}c{d}e\\}"), ["a", { pointer: "b" }, "c", { pointer: "d" }, "e}"]);
 
+  // Syntax error
+  t.throws(() => parse("{}"));
+  t.throws(() => parse("}"));
+  t.throws(() => parse("{"));
+  t.throws(() => parse("{."));
+  t.throws(() => parse(".}"));
+  t.throws(() => parse("{."));
+
   t.end();
 });
