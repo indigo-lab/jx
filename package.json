@@ -23,6 +23,7 @@
   "main": "jx.js",
   "scripts": {
     "test": "tape test/test-*.js",
+    "prepare": "npm run build",
     "build": "npm run property-name-extension && npm run property-value-extension",
     "property-name-extension": "peggy --format commonjs spec/property-name-extension.pegjs -o lib/property-name-extension.js",
     "property-value-extension": "peggy --format commonjs spec/property-value-extension.pegjs -o lib/property-value-extension.js"
