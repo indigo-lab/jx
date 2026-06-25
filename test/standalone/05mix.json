@@ -5,16 +5,16 @@
     "son": ["Bob", "Dave"],
     "daughter": "Carol"
   },
-  "mapping": {
+  "template": {
     "@type": "Person",
-    "name": "/name",
-    "knows/son": {
+    "name": "{name}",
+    "knows{son}": {
       "@type": "Person",
-      "name": "."
+      "name": "{.}"
     },
-    "knows/daughter": {
+    "knows{daughter}": {
       "@type": "Person",
-      "name": "."
+      "name": "{.}"
     }
   },
   "expected": {

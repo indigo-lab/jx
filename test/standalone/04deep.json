@@ -30,14 +30,14 @@
       }
     ]
   },
-  "mapping": {
-    "id": "/key",
-    "narrower/has": {
-      "id": "/key",
-      "narrower/has": {
-        "id": "/key",
-        "narrower/has": {
-          "id": "/key"
+  "template": {
+    "id": "{key}",
+    "narrower{has}": {
+      "id": "{key}",
+      "narrower{has}": {
+        "id": "{key}",
+        "narrower{has}": {
+          "id": "{key}"
         }
       }
     }

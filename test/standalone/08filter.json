@@ -7,12 +7,12 @@
       { "name": "Bob" }
     ]
   },
-  "mapping": {
-    "son/children[gender='M']": { "name": "/name" },
-    "daughter/children[gender='F']": { "name": "/name" },
-    "known/children[gender]": { "name": "/name" },
-    "unknown/children[!gender]": { "name": "/name" },
-    "teen/children[age>12]": { "name": "/name" }
+  "template": {
+    "son{children[gender='M']}": { "name": "{name}" },
+    "daughter{children[gender='F']}": { "name": "{name}" },
+    "known{children[gender]}": { "name": "{name}" },
+    "unknown{children[!gender]}": { "name": "{name}" },
+    "teen{children[age>12]}": { "name": "{name}" }
   },
   "expected": {
     "son": { "name": "John" },

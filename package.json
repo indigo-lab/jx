@@ -22,12 +22,16 @@
   "type": "commonjs",
   "main": "jx.js",
   "scripts": {
-    "test": "tape test/test-*.js"
+    "test": "tape test/test-*.js",
+    "build": "npm run property-name-extension && npm run property-value-extension",
+    "property-name-extension": "peggy --format commonjs spec/property-name-extension.pegjs -o lib/property-name-extension.js",
+    "property-value-extension": "peggy --format commonjs spec/property-value-extension.pegjs -o lib/property-value-extension.js"
   },
   "dependencies": {
     "jsonpointer": "^5.0.1"
   },
   "devDependencies": {
+    "peggy": "^5.1.0",
     "tape": "^5.9.0"
   }
 }

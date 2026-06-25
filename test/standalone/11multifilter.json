@@ -1,0 +1,16 @@
+{
+  "title": "11 multifilter",
+  "input": {
+    "items": [
+      { "name": "A", "active": true, "score": 90 },
+      { "name": "B", "active": true, "score": 40 },
+      { "name": "C", "active": false, "score": 90 }
+    ]
+  },
+  "template": {
+    "result{items[active=true][score>=80]}": { "name": "{name}" }
+  },
+  "expected": {
+    "result": { "name": "A" }
+  }
+}

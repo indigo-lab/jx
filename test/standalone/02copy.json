@@ -4,9 +4,9 @@
     "a": { "hello": "world" },
     "b": [1, 2, 3, 4, 5]
   },
-  "mapping": {
-    "object": "/a",
-    "array": "/b"
+  "template": {
+    "object": "{a}",
+    "array": "{b}"
   },
   "expected": {
     "object": { "hello": "world" },

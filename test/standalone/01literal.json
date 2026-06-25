@@ -7,14 +7,14 @@
     "d": 3.1415,
     "e": "world"
   },
-  "mapping": {
-    "true": "/a",
-    "false": "/b",
-    "null": "/c",
-    "number": "/d",
-    "string": "/e",
-    "bracket": "Hello, {/e}!",
-    "fail": "Hello, {/f}!"
+  "template": {
+    "true": "{a}",
+    "false": "{b}",
+    "null": "{c}",
+    "number": "{d}",
+    "string": "{e}",
+    "bracket": "Hello, {e}!",
+    "fail": "Hello, {f}!"
   },
   "expected": {
     "true": true,

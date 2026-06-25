@@ -11,7 +11,7 @@
     "public": true,
     "license": "CC-BY-4.0"
   },
-  "mapping": {
+  "template": {
     "@context": {
       "dcat": "http://www.w3.org/ns/dcat#",
       "spdx": "http://spdx.org/rdf/terms#",
@@ -19,32 +19,32 @@
       "xsd": "http://www.w3.org/2001/XMLSchema#"
     },
     "@type": "dcat:Dataset",
-    "@id": "urn:uuid:{/uuid}",
-    "dcterms:accessRights/[public=true]": {
+    "@id": "urn:uuid:{uuid}",
+    "dcterms:accessRights{.[public=true]}": {
       "@id": "http://publications.europa.eu/resource/authority/access-right/PUBLIC"
     },
     "distribution": {
       "@type": "dcat:Distibution",
-      "dcterms:title": "/name",
-      "dcat:byteSize": "/size",
+      "dcterms:title": "{name}",
+      "dcat:byteSize": "{size}",
       "dcterms:modified": {
         "@type": "xsd:date",
-        "@value": "/modified"
+        "@value": "{modified}"
       },
-      "spdx:checksum/md5": {
+      "spdx:checksum{md5}": {
         "@type": "spdx:Checksum",
         "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_md5" },
-        "spdx:checksumValue": "."
+        "spdx:checksumValue": "{.}"
       },
-      "spdx:checksum/sha1": {
+      "spdx:checksum{sha1}": {
         "@type": "spdx:Checksum",
         "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" },
-        "spdx:checksumValue": "."
+        "spdx:checksumValue": "{.}"
       },
-      "spdx:checksum/sha256": {
+      "spdx:checksum{sha256}": {
         "@type": "spdx:Checksum",
         "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha256" },
-        "spdx:checksumValue": "."
+        "spdx:checksumValue": "{.}"
       }
     }
   },

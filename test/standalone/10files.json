@@ -1,0 +1,111 @@
+{
+  "title": "10 files",
+  "input": {
+    "name": "data",
+    "files": [
+      {
+        "name": "README.md",
+        "size": 2179,
+        "modified": "2026-06-19",
+        "md5": "3f4fe7d818b7df4b62fb308877e10e92",
+        "sha256": "6f809115fc59c92e2087a2a9f78781da4cd241003f806865b8b61211220cf22b",
+        "sha1": "24d9a449ed32c88c4bea2a4d6aa0c309990930e7"
+      },
+      {
+        "name": "main.js",
+        "size": 3900,
+        "modified": "2026-06-21",
+        "md5": "a8f538c010251c6d589cb8c637661bfb"
+      }
+    ]
+  },
+  "template": {
+    "@context": {
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "spdx": "http://spdx.org/rdf/terms#",
+      "dcterms": "http://purl.org/dc/terms/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@type": "dcat:Dataset",
+    "@id": "https://example.org/{/name}",
+    "dcat:distribution{/files}": {
+      "@type": "dcat:Distibution",
+      "@id": "https://example.org/{/name}/{name}",
+      "dcterms:title": "{name}",
+      "dcat:byteSize": "{size}",
+      "dcterms:modified": {
+        "@type": "xsd:date",
+        "@value": "{modified}"
+      },
+      "spdx:checksum{md5}": {
+        "@type": "spdx:Checksum",
+        "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_md5" },
+        "spdx:checksumValue": "{.}"
+      },
+      "spdx:checksum{sha1}": {
+        "@type": "spdx:Checksum",
+        "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" },
+        "spdx:checksumValue": "{.}"
+      },
+      "spdx:checksum{sha256}": {
+        "@type": "spdx:Checksum",
+        "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha256" },
+        "spdx:checksumValue": "{.}"
+      }
+    }
+  },
+  "expected": {
+    "@context": {
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "spdx": "http://spdx.org/rdf/terms#",
+      "dcterms": "http://purl.org/dc/terms/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "@type": "dcat:Dataset",
+    "@id": "https://example.org/data",
+    "dcat:distribution": [
+      {
+        "@type": "dcat:Distibution",
+        "@id": "https://example.org/data/README.md",
+        "dcterms:title": "README.md",
+        "dcat:byteSize": 2179,
+        "dcterms:modified": {
+          "@type": "xsd:date",
+          "@value": "2026-06-19"
+        },
+        "spdx:checksum": [
+          {
+            "@type": "spdx:Checksum",
+            "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_md5" },
+            "spdx:checksumValue": "3f4fe7d818b7df4b62fb308877e10e92"
+          },
+          {
+            "@type": "spdx:Checksum",
+            "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha1" },
+            "spdx:checksumValue": "24d9a449ed32c88c4bea2a4d6aa0c309990930e7"
+          },
+          {
+            "@type": "spdx:Checksum",
+            "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_sha256" },
+            "spdx:checksumValue": "6f809115fc59c92e2087a2a9f78781da4cd241003f806865b8b61211220cf22b"
+          }
+        ]
+      },
+      {
+        "@type": "dcat:Distibution",
+        "@id": "https://example.org/data/main.js",
+        "dcterms:title": "main.js",
+        "dcat:byteSize": 3900,
+        "dcterms:modified": {
+          "@type": "xsd:date",
+          "@value": "2026-06-21"
+        },
+        "spdx:checksum": {
+          "@type": "spdx:Checksum",
+          "spdx:algorithm": { "@id": "http://spdx.org/rdf/terms#checksumAlgorithm_md5" },
+          "spdx:checksumValue": "a8f538c010251c6d589cb8c637661bfb"
+        }
+      }
+    ]
+  }
+}

@@ -3,10 +3,10 @@
   "input": {
     "name": "John"
   },
-  "mapping": {
+  "template": {
     "type": "Person",
-    "name": "/name",
-    "identifier": { "type": "SSID", "id": "/ssid" }
+    "name": "{name}",
+    "identifier": { "type": "SSID", "id": "{ssid}" }
   },
   "expected": {
     "type": "Person",

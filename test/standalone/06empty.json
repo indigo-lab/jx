@@ -1,9 +1,9 @@
 {
   "title": "06 empty",
   "input": {},
-  "mapping": {
+  "template": {
     "@type": "Person",
-    "name": "/name"
+    "name": "{name}"
   },
   "expected": null
 }

@@ -1,103 +1,77 @@
 const jsonpointer = require("jsonpointer");
+const propertyNameExtension = require("./lib/property-name-extension.js");
+const propertyValueExtension = require("./lib/property-value-extension.js");
 
-function $array(obj) {
+function _asArray(obj) {
   if (Array.isArray(obj)) return obj;
   if (obj === undefined || obj === null) return [];
   return [obj];
 }
 
-function isStatic(a) {
-  if (Array.isArray(a)) return a.find((b) => !isStatic(b)) === undefined;
-  if (typeof a === "string") return a !== "." && !a.startsWith("/") && a.match(/^.*{\/.*}.*$/);
-  for (const [k, v] of Object.entries(a)) if (k.includes("/") || !isStatic(v)) return false;
-  return true;
+function query(pointer, root, current) {
+  if (pointer === ".") return current;
+  if (pointer === "/") return root;
+  if (pointer.startsWith("/")) return jsonpointer.get(root, pointer);
+  return jsonpointer.get(current, `/${pointer}`);
 }
 
-function resolve(context, pointer) {
-  const tokens = pointer.split("[");
-  const head = tokens.shift();
-  const filters = tokens.filter((a) => a.endsWith("]")).map((a) => a.replace(/\]$/, ""));
+function processName(name, root, current) {
+  const e = propertyNameExtension.parse(name);
+  e.contexts = _asArray(query(e.pointer, root, current));
 
-  let res = $array(head === "/" ? context : jsonpointer.get(context, head));
-  for (const filter of filters) {
-    let re;
-    if ((re = filter.match(/^(!)?([^!=<>]+)$/))) {
-      res = res.filter((a) => {
-        if (jsonpointer.get(a, `/${re[2]}`) === undefined) return re[1] === "!";
-        return re[1] !== "!";
-      });
-    } else if ((re = filter.match(/([^!=<>]+)(=|!=|>|<|>=|<=)(.+)$/))) {
-      const op = re[2];
-      const right = JSON.parse(re[3].replace(/^'/, '"').replace(/'$/, '"'));
-      res = res.filter((a) => {
-        const left = jsonpointer.get(a, `/${re[1]}`);
-        if (left === undefined) return false;
-        if (typeof left !== typeof right) return false;
-        if (op === "=") return left === right;
-        if (op === "!=") return left !== right;
-        if (op === ">") return left > right;
-        if (op === "<") return left < right;
-        if (op === ">=") return left >= right;
-        if (op === "<=") return left <= right;
-        return false;
-      });
-    } else {
-      console.error("broken filter", filter);
-      res = [];
-    }
-  }
-  return res;
+  const operations = {
+    Exist: (a) => a !== undefined,
+    NotExist: (a) => a === undefined,
+    "=": (a, b) => a === b,
+    "!=": (a, b) => a !== b,
+    ">": (a, b) => a > b,
+    "<": (a, b) => a < b,
+    ">=": (a, b) => a >= b,
+    "<=": (a, b) => a <= b,
+  };
+
+  for (const { pointer, op, value } of e.filter)
+    e.contexts = e.contexts.filter((context) => {
+      return operations[op](query(pointer, root, context), value);
+    });
+
+  return e;
 }
 
-function dig(template, context) {
-  if (typeof template === "string") {
-    if (template === ".") {
-      return { body: context, good: 1, fail: 0 };
-    } else if (template.startsWith("/")) {
-      const a = jsonpointer.get(context, template);
-      const b = a !== undefined;
-      return { body: a, good: b ? 1 : 0, fail: b ? 0 : 1 };
-    } else if (template.match(/^.*{\/.*}.*$/)) {
-      const res = { body: "", good: 0, fail: 0 };
-      let start = 0;
-      while (start < template.length) {
-        const a = template.indexOf("{/", start);
-        if (a === -1) {
-          res.body += template.substring(start);
-          start = template.length + 1;
-          continue;
-        }
-        const b = template.indexOf("}", a);
-        if (start < a) res.body += template.substring(start, a);
-        const pointer = template.substring(a + 1, b);
-        const v = pointer === "/" ? context : jsonpointer.get(context, pointer);
-        if (v === undefined) res.fail++;
-        else {
-          res.good++;
-          res.body += v;
-        }
-        start = b + 1;
-      }
-      return res;
-    } else {
-      return { body: template, good: 0, fail: 0 };
-    }
-  }
+function processValue(value, root, current) {
+  if (typeof value !== "string") return { body: value, good: 0, fail: 0 };
 
+  const e = propertyValueExtension.parse(value);
+  if (!Array.isArray(e)) {
+    const v = query(e.pointer, root, current);
+    if (v === undefined) return { body: null, good: 0, fail: 1 };
+    return { body: v, good: 1, fail: 0 };
+  }
+  let good = 0;
+  let fail = 0;
+  const body = e.map((a) => {
+    if (a.pointer === undefined) return a;
+    const target = query(a.pointer, root, current);
+    if (target === undefined) {
+      fail++;
+      return "";
+    }
+    good++;
+    return target;
+  });
+  return { body: body.join(""), good, fail };
+}
+
+function dig(template, root, current) {
   const body = {};
   let good = 0;
   let fail = 0;
 
-  for (const [key, val] of Object.entries(template)) {
-    const property = key.split("/")[0];
-
-    const contexts = key.includes("/")
-      ? resolve(context, key.substring(key.indexOf("/")))
-      : $array(context);
-
+  for (const [name, value] of Object.entries(template)) {
+    const { contexts, property } = processName(name, root, current);
     for (const ctx of contexts) {
-      for (const tmpl of $array(val)) {
-        const done = dig(tmpl, ctx);
+      for (const val of _asArray(value)) {
+        const done = typeof val === "object" ? dig(val, root, ctx) : processValue(val, root, ctx);
         good += done.good;
         fail += done.fail;
 
@@ -114,7 +88,7 @@ function dig(template, context) {
   return { body, good, fail };
 }
 
-module.exports = function (template, context) {
-  const res = dig(template, context);
+module.exports = function (template, source) {
+  const res = dig(template, source, source);
   return res.good === 0 && res.fail > 0 ? null : res.body;
 };

@@ -4,9 +4,9 @@
     "name": "Alice",
     "son": ["Bob", "Dave"]
   },
-  "mapping": {
-    "name": "/name",
-    "children/son": "."
+  "template": {
+    "name": "{name}",
+    "children{son}": "{.}"
   },
   "expected": {
     "name": "Alice",
