@@ -1,0 +1,16 @@
+{
+  "title": "11 multifilter",
+  "input": {
+    "items": [
+      { "name": "A", "code": "5" },
+      { "name": "B", "code": 5 },
+      { "name": "C", "code": 7 }
+    ]
+  },
+  "template": {
+    "notFive{items[code!=5]}": { "name": "{name}" }
+  },
+  "expected": {
+    "notFive": [{ "name": "A" }, { "name": "C" }]
+  }
+}
