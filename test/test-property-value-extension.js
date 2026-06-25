@@ -35,5 +35,13 @@ test("test property-value-extension", function (t) {
   t.deepEqual(parse("{b}{d}e"), [{ pointer: "b" }, { pointer: "d" }, "e"]);
   t.deepEqual(parse("{b}{d}"), [{ pointer: "b" }, { pointer: "d" }]);
 
+  // Escaped brace
+  t.deepEqual(parse("\\{a{b}c{d}e"), ["{a", { pointer: "b" }, "c", { pointer: "d" }, "e"]);
+  t.deepEqual(parse("a{b}\\{c{d}e"), ["a", { pointer: "b" }, "{c", { pointer: "d" }, "e"]);
+  t.deepEqual(parse("a{b}c{d}e\\{"), ["a", { pointer: "b" }, "c", { pointer: "d" }, "e{"]);
+  t.deepEqual(parse("\\}a{b}c{d}e"), ["}a", { pointer: "b" }, "c", { pointer: "d" }, "e"]);
+  t.deepEqual(parse("a{b}\\}c{d}e"), ["a", { pointer: "b" }, "}c", { pointer: "d" }, "e"]);
+  t.deepEqual(parse("a{b}c{d}e\\}"), ["a", { pointer: "b" }, "c", { pointer: "d" }, "e}"]);
+
   t.end();
 });
