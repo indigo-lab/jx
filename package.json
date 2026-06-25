@@ -21,6 +21,10 @@
   "author": "indigo-lab",
   "type": "commonjs",
   "main": "jx.js",
+  "files": [
+    "lib/dig.js",
+    "spec/*.pegjs"
+  ],
   "scripts": {
     "test": "tape test/test-*.js",
     "prepare": "npm run build",
