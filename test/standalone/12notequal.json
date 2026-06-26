@@ -1,5 +1,5 @@
 {
-  "title": "11 multifilter",
+  "title": "12 not equal",
   "input": {
     "items": [
       { "name": "A", "code": "5" },
