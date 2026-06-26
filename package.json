@@ -21,7 +21,9 @@
   "author": "indigo-lab",
   "type": "commonjs",
   "main": "jx.js",
+  "types": "jx.d.ts",
   "files": [
+    "jx.d.ts",
     "lib/*.js",
     "spec/*.pegjs"
   ],
